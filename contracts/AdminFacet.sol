@@ -9,7 +9,8 @@ import "contracts/interfaces/IFacet.sol";
 import "contracts/VaultStorage.sol";
 import "./Diamond.sol";
 import "openzeppelin/utils/math/SafeCast.sol";
-import "contracts/blast/IBLAST.sol";
+import "forge-std/Script.sol";
+
 /**
  * @dev a Facet for administrative and deployment logic.
  *
@@ -21,12 +22,11 @@ import "contracts/blast/IBLAST.sol";
  * --delegatecall--> AdminFacet.fallback()
  * --delegatecall--> AdminFacet.initializeFacet()
  */
-
 contract AdminFacet is VaultStorage, IFacet {
     event AuthorizerChanged(IAuthorizer indexed authorizer);
     event TreasuryChanged(address indexed addr);
 
-    address immutable deployer;
+    address public deployer;
     IAuthorizer immutable initialAuth;
     address immutable thisImplementation;
 
@@ -43,10 +43,11 @@ contract AdminFacet is VaultStorage, IFacet {
      *
      */
     function deploy(bytes memory bytecode) external returns (address) {
-        require(msg.sender == deployer);
+        console.log("sender", msg.sender);
+
+        require(msg.sender == deployer, "not deployer");
         address deployed = address(new Diamond());
-        require(deployed != address(0));
-        //try BLAST.configureGovernor(deployed) {} catch (bytes memory) {}
+        require(deployed != address(0), "deploy failed");
         return deployed;
     }
 

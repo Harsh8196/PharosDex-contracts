@@ -1,13 +1,13 @@
-# Sample Hardhat Project
+Official repository of PharosSwap, a veDEX on PHAROS CHAIN
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+### Features
 
-Try running some of the following tasks:
+-   100% Protocol fees distributed to users
+-   Efficient Swap Router
+-   Launchpad for Fair Launches on PHAROS CHAIN
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+```
+forge build
+forge test -vvvv
+forge script script/deploy.pharos.sol:DeployScript --rpc-url https://devnet.dplabs-internal.com --broadcast -vvvv 
 ```

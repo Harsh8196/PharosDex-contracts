@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "forge-std/Test.sol";
-import "script/Deploy.generic.s.sol";
+import "script/deploy.pharos.sol";
 import "contracts/MockERC20.sol";
 import "contracts/pools/constant-product/ConstantProductPool.sol";
 import {StableSwapPoolFactory, StableSwapPool} from "contracts/pools/stableswap/StableSwapPoolFactory.sol";
@@ -10,6 +10,8 @@ import "contracts/pools/constant-product/ConstantProductLibrary.sol";
 import "openzeppelin/token/ERC20/ERC20.sol";
 import "openzeppelin/utils/math/SignedMath.sol";
 import "forge-std/console.sol";
+import "contracts/interfaces/IVC.sol";
+import "./Common.sol";
 
 contract MockVC is IVC, ERC20 {
     constructor() ERC20("lol", "lol") {}

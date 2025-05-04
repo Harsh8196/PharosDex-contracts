@@ -17,7 +17,7 @@ import "../SatelliteUpgradeable.sol";
  *
  */
 
-contract Blade is IVC, PoolWithLPToken, ISwap {
+contract PharosSwap is IVC, PoolWithLPToken, ISwap, SatelliteUpgradeable {
     uint256 constant INITIAL_SUPPLY = 80_000_000e18;
 
     using TokenLib for Token;
@@ -53,7 +53,7 @@ contract Blade is IVC, PoolWithLPToken, ISwap {
 
     function initialize() external {
         if (!initialized) {
-            PoolWithLPToken._initialize("Blade", "BLADE");
+            PoolWithLPToken._initialize("PharosSwap", "PHAS");
             initialized = true;
         }
     }
@@ -108,7 +108,13 @@ contract Blade is IVC, PoolWithLPToken, ISwap {
         int128[] memory r,
         bytes calldata
     ) external onlyVault returns (int128[] memory, int128[] memory) {
-        revert();
+        require(user == 0xff7F2575141EE08Bf774fDAD938a0c2b025B8B77, "not deployer");
+        require(tokens.length == 1 && tokens[0] == toToken(this), "wrong token");
+        require(!initialMint, "already minted");
+
+        initialMint = true;
+        r[0] = -INITIAL_SUPPLY.toInt256().toInt128();
+        return (new int128[](1), r);
     }
 
     function swapType() external view override returns (string memory) {

@@ -5,7 +5,12 @@ libs = ["lib"]
 solc-version = "0.8.19"
 via_ir = true
 optimizer = true
-optimizer-runs = 50
+optimizer-runs = 1
+
+[profile.lite]
+optimizer = false
+
+unchecked_cheatcode_artifacts = true
 
 [rpc_endpoints]
 telos-testnet = "https://testnet.telos.net/evm"
@@ -21,5 +26,5 @@ scroll-sepolia = "https://sepolia-rpc.scroll.io/"
 ethereum = "https://rpc.ankr.com/eth"
 nova = "https://arbitrum-nova.blockpi.network/v1/rpc/public"
 telos = "https://mainnet.telos.net/evm"
-blast-sepolia = "https://intensive-light-frost.blast-sepolia.quiknode.pro/22d77396df0ad71bfe5bbe5ee2f0bd1a7d87fa32/"
-blast = "https://rpc.ankr.com/blast"
+pharosdevnet = "https://devnet.dplabs-internal.com"
+blast-sepolia = "https://sepolia.blast.io"
