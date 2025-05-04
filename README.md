@@ -20,8 +20,8 @@ forge script script/deploy.pharos.sol:DeployScript --rpc-url https://devnet.dpla
 | Lens                          | 0xa3C18F3E08b71774b96a544C58Ecc363efF07701 |
 | Volatile Pool Factory         | 0x0F2AC9b59F51018Afcf47ae8a1e154Ad9A5Dbe10 |
 | Stable Pool Factory           | 0x9FfC95Db1E18fBfE3DcC4CBb237DA28269111a52 |
-| $PHAROS                       | 0x716e5aa44BC37c54C7dc9427Ef4344AB5EA3a967 |
-| $vePHAROS                     | 0x5E338E6b8Cab4EC02f636919AFB990c0CE7089E8 |
+| $PHAS                       | 0x716e5aa44BC37c54C7dc9427Ef4344AB5EA3a967 |
+| $vePHAS                     | 0x5E338E6b8Cab4EC02f636919AFB990c0CE7089E8 |
 | $WPTT                         | 0x2fDf50e10927333c73a2F8ceC708018b3C3fD19a |
 | $USDC                         | 0xE1B2057710A262F4aFb49636bCe05EE2b593f3b0 |
 | Authorizer Contract For Diamond | 0xC4ab0e3878a866e430ae334b71117A434A376758 |
