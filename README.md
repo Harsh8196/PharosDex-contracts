@@ -12,7 +12,8 @@ forge test -vvvv
 forge script script/deploy.pharos.sol:DeployScript --rpc-url https://devnet.dplabs-internal.com --broadcast -vvvv 
 ```
 
-### Contract Addresses Deployed on Open Campus Sepolia
+### Contract Addresses Deployed on Pharos Devnet
+
 | Name                           | Address                                    |
 |--------------------------------|--------------------------------------------|
 | Vault (Router)                | 0xb91465A7cAc67eBCcCC218484205711713E587Bd |
